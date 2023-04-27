@@ -10,21 +10,14 @@ sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
-
-    maven {
-        url 'https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates'
-    }
 }
 
 ext {
-    set('springCloudVersion', '2022.0.2')
+    set('springCloudVersion', "2022.0.2")
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-config-server'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
