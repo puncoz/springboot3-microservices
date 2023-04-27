@@ -1,0 +1,9 @@
+---
+version: "3.8"
+
+services:
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin:latest
+    ports:
+      - "9411:9411"
