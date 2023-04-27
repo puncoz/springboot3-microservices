@@ -1,5 +1,6 @@
 package org.microservices.departmentservice.controller;
 
+import org.microservices.departmentservice.client.EmployeeClient;
 import org.microservices.departmentservice.model.Department;
 import org.microservices.departmentservice.repository.DepartmentRepository;
 import org.slf4j.Logger;
@@ -16,6 +17,9 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentRepository repository;
+
+    @Autowired
+    private EmployeeClient employeeClient;
 
     @GetMapping
     public List<Department> findAll() {
@@ -36,5 +40,18 @@ public class DepartmentController {
         LOGGER.info("Department find by id: {}", id);
 
         return repository.findById(id);
+    }
+
+    @GetMapping("/with-employees")
+    public List<Department> findAllWithEmployees() {
+        LOGGER.info("Find all departments with employees");
+
+        List<Department> departments = repository.findAll();
+
+        departments.forEach(department -> {
+            department.setEmployees(employeeClient.findByDepartment(department.getId()));
+        });
+
+        return departments;
     }
 }
